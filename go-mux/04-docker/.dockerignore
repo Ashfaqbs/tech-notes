@@ -1,0 +1,43 @@
+# Git
+.git
+.gitignore
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+main
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test files
+*_test.go
+*_test.go.orig
+
+# Dependency directories
+vendor/
+
+# Go module files (we copy them explicitly)
+go.mod
+go.sum
+
+# Environment files (NEVER include in Docker!)
+.env
+.env.local
+.env.*.local
+
+# Documentation
+*.md
+docs/
+
+# Docker files (not needed inside container)
+Dockerfile
+docker-compose.yml
+.dockerignore

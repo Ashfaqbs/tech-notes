@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node  # Run as a single node (non-production)
+      - xpack.security.enabled=false  # Disable security for simplicity 
+      # when removed/commented xpack.security.enabled=false we get password in logs and username will be elastic 
+      # Adding Custom pass update code , and postman collection for the same 
+      # - ELASTIC_PASSWORD=myelasticpass  # Custom password for 'elastic' user
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m  # Allocate 512MB heap memory
+    ports:
+      - "9200:9200"  # REST API port
+      - "9300:9300"  # Node communication port (not needed for single node, but included)
+    volumes:
+      - esdata:/usr/share/elasticsearch/data  # Persist data
+    networks:
+      - esnet
+# URL http://localhost:9200/
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.12.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200  # Points Kibana to Elasticsearch
+      # - ELASTICSEARCH_USERNAME=Mycustomelastic  # Customs username
+      # - ELASTICSEARCH_PASSWORD=myelasticpass  # Same as set in Elasticsearch
+    ports:
+      - "5601:5601"  # Kibana UI port
+    depends_on:
+      - elasticsearch  # Ensures Elasticsearch starts first
+    networks:
+      - esnet
+
+volumes:
+  esdata:  # Named volume for data persistence
+
+networks:
+  esnet:  # Custom network for Elasticsearch
+    driver: bridge
+
+    # URL http://localhost:5601/app/home#/

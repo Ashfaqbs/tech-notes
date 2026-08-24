@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # =============================================================
+  # API Service (Go + Mux)
+  # =============================================================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mux-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - ENV=development
+      - DATABASE_URL=postgres://user:password@db:5432/mydb?sslmode=disable
+      - JWT_SECRET=your-super-secret-jwt-key
+      - ALLOWED_ORIGIN=http://localhost:3000
+      - READ_TIMEOUT=15
+      - WRITE_TIMEOUT=15
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # =============================================================
+  # PostgreSQL Database
+  # =============================================================
+  db:
+    image: postgres:16-alpine
+    container_name: mux-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d mydb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # =============================================================
+  # Redis (Optional - for caching/sessions)
+  # =============================================================
+  redis:
+    image: redis:7-alpine
+    container_name: mux-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:

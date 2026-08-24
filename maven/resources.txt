@@ -1,0 +1,2 @@
+- creating simple maven project
+https://www.simplilearn.com/tutorials/maven-tutorial/maven-project-in-eclipse

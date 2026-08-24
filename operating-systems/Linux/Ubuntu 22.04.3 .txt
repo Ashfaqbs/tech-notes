@@ -1,0 +1,527 @@
+unix Ubuntu 22.04.3 LTS
+
+uname -a
+
+~$ uname -a
+Linux Ashu 5.15.133.1-microsoft-standard-WSL2 #1 SMP Thu Oct 5 21:02:42 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
+
+
+nslookup example.com
+ill display the IP address of the server if it's found. If the server name is not found, it will show an error message.
+
+firewall issue with Kafka broker on Linux
+telnet kafka.example.com 9092
+
+
+Installing, this may take a few minutes...
+Please create a default UNIX user account. The username does not need to match your Windows username.
+For more information visit: https://aka.ms/wslusers
+Enter new UNIX username: ashfaq
+New password:
+Retype new password:
+passwd: password updated successfully
+Installation successful!
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.133.1-microsoft-standard-WSL2 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+
+This message is shown once a day. To disable it please create the
+/home/ashfaq/.hushlogin file.
+ashfaq@Ashu:~$ ls
+ashfaq@Ashu:~$ pwd
+/home/ashfaq
+ashfaq@Ashu:~$ sudo ls
+[sudo] password for ashfaq:
+ashfaq@Ashu:~$ sudo pwd
+/home/ashfaq
+ashfaq@Ashu:~$
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------Commands-----------------------------------------------------------------
+
+Create a file 
+
+ashfaq@Ashu:~$ touch sampleFile.txt
+ashfaq@Ashu:~$ ls
+Documents  Downloads  Pictures  sampleFile.txt
+
+
+add data to the file 
+
+ashfaq@Ashu:~/Downloads$ nano sampleFile.txt
+
+
+read data from the file 
+
+ashfaq@Ashu:~/Downloads$ cat sampleFile.txt
+This is data i have added using nano filename command by this we can add data and i have created file using touch  , so touch filename
+ashfaq@Ashu:~/Downloads$
+
+
+Copy a file 
+
+ashfaq@Ashu:~$ cp sampleFile.txt  Downloads
+ashfaq@Ashu:~$ ls
+Documents  Downloads  Pictures  sampleFile.txt
+ashfaq@Ashu:~$ cd Do
+Documents/ Downloads/
+ashfaq@Ashu:~$ cd Downloads/
+ashfaq@Ashu:~/Downloads$ ls
+sampleFile.txt
+
+
+Move a file 
+
+ashfaq@Ashu:~$ touch downloadedtextFile.txt
+ashfaq@Ashu:~$ ls
+Documents  Downloads  Pictures  downloadedtextFile.txt  sampleFile.txt
+ashfaq@Ashu:~$ mv downloadedtextFile.txt  Downloads/
+ashfaq@Ashu:~$ cd Downloads
+ashfaq@Ashu:~/Downloads$ ls
+downloadedtextFile.txt  sampleFile.txt
+
+
+Create a directory or folder
+
+ashfaq@Ashu:~$ mkdir DummyFolder
+ashfaq@Ashu:~$ ls
+Documents  Downloads  DummyFolder  Pictures  sampleFile.txt
+
+
+Navigate between directories:
+cd new_directory
+
+List of folders and files
+ashfaq@Ashu:~$ ls
+Documents  Downloads  Pictures  sampleFile.txt
+
+List files and directories with detailed information:
+
+ashfaq@Ashu:~$ ls -l
+total 12
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:15 Documents
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:37 Downloads
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:16 Pictures
+-rw-r--r-- 1 ashfaq ashfaq    0 Apr  7 10:18 sampleFile.txt
+
+
+If you want to display the files with the most recent modification time at the top of the list, you can use the -t option with ls
+
+ashfaq@Ashu:~$ ls -lt
+total 16
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:41 DummyFolder
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:40 Downloads
+-rw-r--r-- 1 ashfaq ashfaq    0 Apr  7 10:18 sampleFile.txt
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:16 Pictures
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:15 Documents
+
+If you also want to reverse the order so that the most recent files are listed at the top, you can combine the -t and -r options like so:
+
+ashfaq@Ashu:~$ ls -ltr
+total 16
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:15 Documents
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:16 Pictures
+-rw-r--r-- 1 ashfaq ashfaq    0 Apr  7 10:18 sampleFile.txt
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:40 Downloads
+drwxr-xr-x 2 ashfaq ashfaq 4096 Apr  7 10:41 DummyFolder
+
+
+Creating a Zip of a folder
+
+
+note make sure you have zip downloaded :
+
+ashfaq@Ashu:~$ ls
+Documents  Downloads  DummyFolder  Pictures  sampleFile.txt
+ashfaq@Ashu:~$ zip -r DummyFolderbackup.zip DummyFolder
+Command 'zip' not found, but can be installed with:
+sudo apt install zip
+ashfaq@Ashu:~$ sudo apt install zip
+[sudo] password for ashfaq:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  unzip
+The following NEW packages will be installed:
+  unzip zip
+0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+Need to get 350 kB of archives.
+After this operation, 929 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 unzip amd64 6.0-26ubuntu3.1 [174 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/main amd64 zip amd64 3.0-12build2 [176 kB]
+Fetched 350 kB in 3s (112 kB/s)
+Selecting previously unselected package unzip.
+(Reading database ... 24208 files and directories currently installed.)
+Preparing to unpack .../unzip_6.0-26ubuntu3.1_amd64.deb ...
+Unpacking unzip (6.0-26ubuntu3.1) ...
+Selecting previously unselected package zip.
+Preparing to unpack .../zip_3.0-12build2_amd64.deb ...
+Unpacking zip (3.0-12build2) ...
+Setting up unzip (6.0-26ubuntu3.1) ...
+Setting up zip (3.0-12build2) ...
+Processing triggers for man-db (2.10.2-1) ...
+
+Implementing
+
+ashfaq@Ashu:~$ zip -r DummyFolderbackup.zip DummyFolder
+  adding: DummyFolder/ (stored 0%)
+  adding: DummyFolder/file2.txt (stored 0%)
+  adding: DummyFolder/file3.txt (stored 0%)
+  adding: DummyFolder/file.txt (stored 0%)
+ashfaq@Ashu:~$ ls
+Documents  Downloads  DummyFolder  DummyFolderbackup.zip  Pictures  backups  sampleFile.txt
+
+
+Moving the zipfile to backups folder
+ashfaq@Ashu:~$ mv DummyFolderbackup.zip backups
+ashfaq@Ashu:~$ ls
+Documents  Downloads  DummyFolder  Pictures  backups  sampleFile.txt
+ashfaq@Ashu:~$ cd backups/
+ashfaq@Ashu:~/backups$ ls
+DummyFolderbackup.zip
+
+Moving the zipfile to backups internal folder
+
+ashfaq@Ashu:~/backups$ mkdir 2022 2023 2024
+ashfaq@Ashu:~/backups$ ls
+2021  2022  2023  2024  DummyFolderbackup.zip
+ashfaq@Ashu:~/backups$ cd ../
+ashfaq@Ashu:~$ ls
+Documents  Downloads  DummyFolder  Pictures  backups  sampleFile.txt
+ashfaq@Ashu:~$ zip -r Dummyfolder2024.zip  DummyFolder
+  adding: DummyFolder/ (stored 0%)
+  adding: DummyFolder/file2.txt (stored 0%)
+  adding: DummyFolder/file3.txt (stored 0%)
+  adding: DummyFolder/file.txt (stored 0%)
+ashfaq@Ashu:~$ ls
+Documents  Downloads  DummyFolder  Dummyfolder2024.zip  Pictures  backups  sampleFile.txt
+ashfaq@Ashu:~$ mv Dummyfolder2024.zip  backups/2024
+ashfaq@Ashu:~$ ls
+Documents  Downloads  DummyFolder  Pictures  backups  sampleFile.txt
+ashfaq@Ashu:~$ cd backups
+ashfaq@Ashu:~/backups$ cd 2024
+ashfaq@Ashu:~/backups/2024$ ls
+Dummyfolder2024.zip
+ashfaq@Ashu:~/backups/2024$
+
+WORKING WITH TAR COMMAND :
+
+root@localhost:~# tar
+tar: You must specify one of the '-Acdtrux', '--delete' or '--test-label' options
+Try 'tar --help' or 'tar --usage' for more information.
+root@localhost:~# tar -cvf  maintar.tar  sam.txt backupfiles/
+sam.txt
+backupfiles/
+backupfiles/sam.txt
+root@localhost:~# ls
+Desktop    Music     Templates  backupfiles  sam.txt
+Documents  Pictures  Videos     dummy.sh
+Downloads  Public    apps       maintar.tar
+root@localhost:~# tar -tvf maintar.tar
+-rwx------ root/root        27 2024-09-26 10:52 sam.txt
+drwx------ root/root         0 2024-09-26 10:53 backupfiles/
+-rwx------ root/root        27 2024-09-26 10:53 backupfiles/sam.txt
+root@localhost:~# tar -xvf archive.tar
+tar: archive.tar: Cannot open: No such file or directory
+tar: Error is not recoverable: exiting now
+root@localhost:~# tar -xvf maintar.tar
+sam.txt
+backupfiles/
+backupfiles/sam.txt
+root@localhost:~# ls
+Desktop    Music     Templates  backupfiles  sam.txt
+Documents  Pictures  Videos     dummy.sh
+Downloads  Public    apps       maintar.tar
+root@localhost:~#
+
+TAR WHOLE STORY 
+
+---_--------------------
+
+Great! Let's go through some tar commands using your sam.txt file and backupfilea folder. We’ll cover creating archives, extracting them, and other useful operations.
+
+1. Creating a Basic Archive
+
+We’ll start by creating a tar archive that includes sam.txt and the backupfilea directory.
+
+Command:
+
+tar -cvf archive.tar sam.txt backupfilea/
+
+Explanation:
+
+-c: Create a new archive.
+
+-v: Verbose mode; shows the files being added to the archive.
+
+-f archive.tar: Specifies the filename of the archive (archive.tar).
+
+This command creates an uncompressed archive.tar containing sam.txt and the contents of the backupfilea folder.
+
+
+2. Viewing the Contents of an Archive
+
+To see what’s inside your archive.tar without extracting it:
+
+Command:
+
+tar -tvf archive.tar
+
+Explanation:
+
+-t: List the contents of the archive.
+
+-v: Verbose output; shows details like file size and permissions.
+
+-f archive.tar: The archive file to list.
+
+
+3. Extracting an Archive
+
+To extract everything from archive.tar:
+
+Command:
+
+tar -xvf archive.tar
+
+Explanation:
+
+-x: Extract the files from the archive.
+
+-v: Verbose mode; shows the files being extracted.
+
+-f archive.tar: The archive file to extract.
+
+
+4. Creating a Compressed Archive
+
+To create a compressed tar archive using gzip:
+
+Command:
+
+tar -czvf archive.tar.gz sam.txt backupfilea/
+
+Explanation:
+
+-c: Create a new archive.
+
+-z: Compress the archive using gzip.
+
+-v: Verbose mode; shows the files being added to the archive.
+
+-f archive.tar.gz: The filename of the compressed archive.
+
+
+5. Extracting a Compressed Archive
+
+To extract a .tar.gz file:
+
+Command:
+
+tar -xzvf archive.tar.gz
+
+Explanation:
+
+-x: Extract the archive.
+
+-z: Decompress the gzip-compressed archive.
+
+-v: Verbose mode.
+
+-f archive.tar.gz: The compressed archive file to extract.
+
+
+6. Adding Files to an Existing Archive
+
+To add a new file, say newfile.txt, to the existing archive.tar:
+
+Command:
+
+tar -rvf archive.tar newfile.txt
+
+Explanation:
+
+-r: Append (r stands for "replace") files to the existing archive.
+
+-v: Verbose mode.
+
+-f archive.tar: The archive file to modify.
+
+
+7. Extracting Specific Files from an Archive
+
+To extract only sam.txt from archive.tar:
+
+Command:
+
+tar -xvf archive.tar sam.txt
+
+Explanation:
+
+-x: Extract files.
+
+-v: Verbose mode.
+
+-f archive.tar: The archive file to extract from.
+
+sam.txt: The specific file to extract.
+
+
+8. Excluding Files While Creating an Archive
+
+To create an archive of backupfilea/ but exclude sam.txt:
+
+Command:
+
+tar -cvf archive.tar backupfilea/ --exclude=sam.txt
+
+Explanation:
+
+--exclude=sam.txt: Excludes sam.txt from the archive.
+
+
+9. Creating a Bzip2 Compressed Archive
+
+If you prefer bzip2 compression instead of gzip:
+
+Command:
+
+tar -cjvf archive.tar.bz2 sam.txt backupfilea/
+
+Explanation:
+
+-j: Compress the archive using bzip2.
+
+-c, -v, -f: Same as before, creating a new archive.
+
+
+10. Extracting a Bzip2 Compressed Archive
+
+To extract a .tar.bz2 file:
+
+Command:
+
+tar -xjvf archive.tar.bz2
+
+Explanation:
+
+-x: Extract files.
+
+-j: Decompress the bzip2-compressed archive.
+
+-v: Verbose mode.
+
+-f: The filename of the compressed archive.
+
+
+Practice With Your Files:
+
+Try the following with sam.txt and backupfilea:
+
+1. Create a regular archive: tar -cvf myarchive.tar sam.txt backupfilea/
+
+
+2. Create a compressed archive: tar -czvf myarchive.tar.gz sam.txt backupfilea/
+
+
+3. List the contents of the archive: tar -tvf myarchive.tar.gz
+
+
+4. Extract specific files: tar -xvf myarchive.tar.gz sam.txt
+
+
+5. Append a file: Create a new file (echo "New content" > newfile.txt) and then append it: tar -rvf myarchive.tar newfile.txt.
+
+
+
+Summary:
+
+tar is versatile for archiving and compressing files.
+
+It can combine multiple files and directories into a single file and compress it with gzip or bzip2.
+
+Use the appropriate options (-c, -x, -t, -z, -j, -v, -f) based on what you need to do.
+
+
+Try these out on your Linux machine and let me know if you have any questions!
+
+
+
+
+--------------------
+
+
+
+
+
+
+
+top command :
+
+The top command in Linux is used to display system resource usage in real-time. When you run top, it provides a dynamic view of processes currently running on your system, along with information such as CPU usage, memory usage, and more.
+
+ashfaq@Ashu:~/backups/2024$ top
+top - 10:58:25 up 49 min,  1 user,  load average: 0.00, 0.00, 0.00
+Tasks:  33 total,   1 running,  32 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   7814.3 total,   6916.0 free,    502.8 used,    395.4 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   7080.1 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+      1 root      20   0  167036  12564   8392 S   0.0   0.2   0:00.75 systemd
+      2 root      20   0    2460   1336   1224 S   0.0   0.0   0:00.00 init-systemd(Ub
+      6 root      20   0    2504    196    196 S   0.0   0.0   0:00.21 init
+     35 root      19  -1   47732  15080  14068 S   0.0   0.2   0:00.14 systemd-journal
+     58 root      20   0   21832   5768   4436 S   0.0   0.1   0:00.29 systemd-udevd
+     71 root      20   0    4496    180     32 S   0.0   0.0   0:00.00 snapfuse
+     72 root      20   0    4852   1768   1292 S   0.0   0.0   0:01.11 snapfuse
+     74 root      20   0    4628    180     32 S   0.0   0.0   0:00.00 snapfuse
+
+
+
+
+
+This command will display the full command used to launch the process, including the path to the executable.
+
+ps -p 325 -o cmd take pid from top command and now for that PID if we want to see its path 
+
+    325 root      20   0  721824  83228  21572 S   0.0   1.0   0:06.68 python3.10
+
+ashfaq@Ashu:~/backups/2024$ ps -p 325 -o cmd
+CMD
+/snap/ubuntu-desktop-installer/1276/usr/bin/python3.10 -m subiquity.cmd.server --use-os-prober --storage-version=2 --pos
+ashfaq@Ashu:~/backups/2024$
+
+
+
+Find Files 
+
+find. -type f \( -name ".txt" -o -name ".hprof" -o -name ".dmp" -o -name ".trc" \) -size +20M
+
+ls -laShR
+
+ls -laSh
+
+find. -type f -size +20M
+
+
+
+
+
+
+
+

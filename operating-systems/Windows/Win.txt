@@ -1,0 +1,71 @@
+
+
+Command Prompt (cmd) / PowerShell
+dir /b > filenames.txt
+
+
+
+dir
+
+Scenario: List the contents of a directory.
+Usage: dir C:\Users\YourUserName\Documents
+
+
+cd
+
+Scenario: Change the current working directory.
+Usage: cd C:\Program Files
+
+
+copy / xcopy / robocopy
+
+Scenario: Copy files or directories from one location to another.
+Usage: xcopy C:\source\* D:\destination\ /E /H (Copy directories, including hidden files and subdirectories).
+
+
+ipconfig
+
+Scenario: Display network configuration details.
+Usage: ipconfig /all
+
+
+ping
+
+Scenario: Test connectivity to a network or internet host.
+Usage: ping www.google.com
+
+
+tasklist
+
+Scenario: List all running processes on the system.
+Usage: tasklist
+
+
+taskkill
+
+Scenario: Terminate a process by its name or PID.
+Usage: taskkill /F /PID 1234
+
+
+netstat
+
+Scenario: Display active network connections and listening ports.
+Usage: netstat -an
+
+
+tracert
+
+Scenario: Trace the route packets take to reach a network host.
+Usage: tracert www.example.com
+
+
+Get-Process (PowerShell)
+
+Scenario: Get a list of running processes.
+Usage: Get-Process | Sort-Object CPU -Descending
+
+
+Set-ExecutionPolicy (PowerShell)
+
+Scenario: Change the PowerShell script execution policy.
+Usage: Set-ExecutionPolicy RemoteSigned

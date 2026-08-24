@@ -1,0 +1,328 @@
+- Check and Add user and to group
+ashu㉿kali)-[~/Desktop/code/understanding-ssl]
+└─$ id bob
+
+id: ‘bob’: no such user
+                                                                                                                           
+┌──(ashu㉿kali)-[~/Desktop/code/understanding-ssl]
+└─$ sudo useradd bob-dev
+
+                                                                                                                           
+┌──(ashu㉿kali)-[~/Desktop/code/understanding-ssl]
+└─$ id bob-dev          
+
+uid=1002(bob-dev) gid=1004(bob-dev) groups=1004(bob-dev)
+                                                                                                                           
+┌──(ashu㉿kali)-[~/Desktop/code/understanding-ssl]
+└─$ sudo usermod -a -G developersGroup bob-dev
+
+--
+
+- Check all the group command
+┌──(ashu㉿kali)-[~/Desktop/code/understanding-ssl]
+└─$ cat /etc/group
+
+root:x:0:
+daemon:x:1:
+docker:x:137:ashu
+mygroup:x:1001:newuser
+newuser:x:1002:
+developersGroup:x:1003:bob-dev
+bob-dev:x:1004:
+                                                                                                                           
+- Check individual user in group
+                                                                                                                           
+┌──(ashu㉿kali)-[~/Desktop/code/understanding-ssl]
+└─$ groups bob-dev
+
+bob-dev : bob-dev developersGroup
+
+- Add user with their hom dir
+                                                                                                                           
+┌──(ashu㉿kali)-[~/Desktop/code/understanding-ssl]
+└─$ sudo useradd -m -s /bin/bash alice
+
+                                                                                                                           
+
+                                                                                                                           
+- Command to see list of files with file indicators, user and groups access
+
+┌──(ashu㉿kali)-[~/Desktop/code/understanding-ssl]
+└─$ ls -l python                        
+total 8
+-rw-rw-r-- 1 ashu ashu  725 Feb 23 02:37 app.py
+-rw-rw-r-- 1 ashu ashu 1046 Feb 22 11:39 server.crt
+                                                                                                                           
+┌──(ashu㉿kali)-[~/Desktop/code/understanding-ssl]
+└─$ cd ..               
+                                                                                                                           
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls -l       
+total 8
+-rw-rw-r-- 1 ashu ashu    0 Feb 23 02:53 Temp
+drwxrwxr-x 2 ashu ashu 4096 Feb 22 11:53 file-permission
+drwxrwxr-x 3 ashu ashu 4096 Feb 23 01:08 understanding-ssl
+                                                                                                                           
+
+
+- Changing the group access from ashu to developersGroup for Temp
+
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ sudo chgrp developersGroup Temp
+
+[sudo] password for ashu: 
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls -l                          
+total 24
+-rw-rw-r-- 1 ashu developersGroup 12861 Feb 23 06:47 Temp
+drwxrwxr-x 2 ashu ashu             4096 Feb 22 11:53 file-permission
+drwxrwxr-x 3 ashu ashu             4096 Feb 23 01:08 understanding-ssl
+
+
+- Changing the user from ashu to bob-dev control for Temp
+
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ sudo chown bob-dev Temp
+
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls -l                  
+total 24
+-rw-rw-r-- 1 bob-dev developersGroup 12861 Feb 23 06:47 Temp
+drwxrwxr-x 2 ashu    ashu             4096 Feb 22 11:53 file-permission
+drwxrwxr-x 3 ashu    ashu             4096 Feb 23 01:08 understanding-ssl
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ touch Sample            
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls -l
+total 24
+-rw-rw-r-- 1 ashu    ashu                0 Feb 23 07:10 Sample
+-rw-rw-r-- 1 bob-dev developersGroup 12861 Feb 23 06:47 Temp
+drwxrwxr-x 2 ashu    ashu             4096 Feb 22 11:53 file-permission
+drwxrwxr-x 3 ashu    ashu             4096 Feb 23 01:08 understanding-ssl
+
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls -l                                                  
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ sudo chown alice:developersGroup  Sample
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls -l                                   
+total 24
+-rw-rw-r-- 1 alice   developersGroup     0 Feb 23 07:10 Sample
+-rw-rw-r-- 1 bob-dev developersGroup 12861 Feb 23 06:47 Temp
+drwxrwxr-x 2 ashu    ashu             4096 Feb 22 11:53 file-permission
+drwxrwxr-x 3 ashu    ashu             4096 Feb 23 01:08 understanding-ssl
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ cd Sample
+cd: not a directory: Sample
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ mkdir Sample
+mkdir: cannot create directory ‘Sample’: File exists
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ rm Sample     
+rm: remove write-protected regular empty file 'Sample'? 
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls          
+Sample  Temp  file-permission  understanding-ssl
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ sudo rm Sample                                                     
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls
+Temp  file-permission  understanding-ssl
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ mkdir Sample
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls
+Sample  Temp  file-permission  understanding-ssl
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls -l
+total 28
+drwxrwxr-x 2 ashu    ashu             4096 Feb 23 07:12 Sample
+-rw-rw-r-- 1 bob-dev developersGroup 12861 Feb 23 06:47 Temp
+drwxrwxr-x 2 ashu    ashu             4096 Feb 22 11:53 file-permission
+drwxrwxr-x 3 ashu    ashu             4096 Feb 23 01:08 understanding-ssl
+
+
+- Changing the user and group using chown 
+
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ sudo chown alice:developersGroup  Sample
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls   
+Sample  Temp  file-permission  understanding-ssl
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls -l
+total 28
+drwxrwxr-x 2 alice   developersGroup  4096 Feb 23 07:12 Sample
+-rw-rw-r-- 1 bob-dev developersGroup 12861 Feb 23 06:47 Temp
+drwxrwxr-x 2 ashu    ashu             4096 Feb 22 11:53 file-permission
+drwxrwxr-x 3 ashu    ashu             4096 Feb 23 01:08 understanding-ssl
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ sudo rm Temp                            
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ ls   
+Sample  file-permission  understanding-ssl
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code]
+└─$ cd Sample 
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code/Sample]
+└─$ ls
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code/Sample]
+└─$ touch Content.txt
+touch: cannot touch 'Content.txt': Permission denied as ashu is current owner but file owner is alice
+                                                                                                     
+
+changing to other user
+
+┌──(ashu㉿kali)-[~/Desktop/code/Sample]
+└─$ sudo su - alice
+
+┌──(alice㉿kali)-[~]
+└─$ touch content.txt                                                                                                       
+
+┌──(alice㉿kali)-[~]
+└─$ ls                                                                                                                      
+content.txt
+
+┌──(alice㉿kali)-[~]
+└─$ ls -l                                                                                                                   
+total 0
+-rw-rw-r-- 1 alice alice 0 Feb 23 07:15 content.txt
+
+┌──(alice㉿kali)-[~]
+└─$ ls                                                                                                                      
+content.txt
+
+┌──(alice㉿kali)-[~]
+└─$ exit                                                                                                                    
+logout
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code/Sample]
+└─$ sudo su - alice
+
+                                                                                                                            
+┌──(ashu㉿kali)-[~/Desktop/code/Sample]
+└─$ sudo passwd alice
+
+New password: 
+Retype new password: 
+passwd: password updated successfully
+passwd is alice
+- when creating the user alice the password was not created so now setting the password post login out to the user
+                                                                                                                            
+                                                                                 
+┌──(ashu㉿kali)-[~/Desktop/code/Sample]
+└─$ su alice  
+Password: 
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ su ashu                                                                                                                 
+Password: 
+┌──(ashu㉿kali)-[~/Desktop/code/Sample]
+└─$ su alice                
+Password: 
+
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ cd ..                                                                                                                   
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code]
+└─$ ls -l                                                                                                                   
+total 32
+drwxrwxr-x 2 alice developersGroup  4096 Feb 23 07:12 Sample
+-rw-rw-r-- 1 ashu  ashu            17801 Feb 23 07:26 Temp
+drwxrwxr-x 2 ashu  ashu             4096 Feb 23 07:20 file-permission
+drwxrwxr-x 3 ashu  ashu             4096 Feb 23 01:08 understanding-ssl
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code]
+└─$ cd Sample/
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ touch sampel.txt                                                                                                        
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ vim sampel.txt 
+
+  
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ cat                                                                                                                     
+.sampel.txt.swp  sampel.txt       
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ cat sampel.txt                                                                                                          
+This is a smple file  i need to test owneership wiith it 
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ nano sampel.txt                                                                                                         
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ cat sampel.txt 
+This is a smple file  i need to test owneership wiith it 
+This is sample file again
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ ls -l
+total 4
+-rw-rw-r-- 1 alice alice 84 Feb 23 07:28 sampel.txt
+
+- Removing the write access to the alice group for file sampel.txt 
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ chmod g-w sampel.txt
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ ls -l
+total 4
+-rw-r--r-- 1 alice alice 84 Feb 23 07:28 sampel.txt
+
+
+- Adding back the write access to the alice group for file sampel.txt 
+
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ chmod g+rw sampel.txt                                                                                                   
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ ls -l                                                                                                                   
+total 4
+-rw-rw-r-- 1 alice alice 84 Feb 23 07:28 sampel.txt
+
+- Adding the executable file (only for programs but we are testing for files) access to the alice user  for file sampel.txt 
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ chmod u+x sampel.txt                                                                                                    
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ ls -l                                                                                                                   
+total 4
+-rwxrw-r-- 1 alice alice 84 Feb 23 07:28 sampel.txt
+- Adding the executable file (only for programs but we are testing for files) access to the alice group  for file sampel.txt 
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ chmod g+x sampel.txt                                                                                                    
+
+┌──(alice㉿kali)-[/home/ashu/Desktop/code/Sample]
+└─$ ls -l                                                                                                                   
+total 4
+-rwxrwxr-- 1 alice alice 84 Feb 23 07:28 sampel.txt
+
